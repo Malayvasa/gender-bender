@@ -6,7 +6,7 @@ let albumCovers = require.context("../src/assets/albumCovers", true);
 let itemImg = albumCovers(`./${3}.png`).default;
 
 function App() {
-  const [animState, setAnimState] = useState(14);
+  const [animState, setAnimState] = useState(1);
   const [currentHoverColor, setCurrentHoverColor] = useState("#000");
   const [currentSongObject, setCurrentSongObject] = useState(null);
   const advanceState = () => {
