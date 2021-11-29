@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { average, prominent } from "color.js";
+import { prominent } from "color.js";
 import data from "./data";
 let albumCovers = require.context("../src/assets/albumCovers", true);
 let itemImg = albumCovers(`./${3}.png`).default;
@@ -15,7 +15,7 @@ function App() {
   //function to go through albums and get average color of each song
   const getAverageColor = () => {
     data.forEach((song) => {
-      let color = prominent(albumCovers(`./${song.Cover}.png`).default, {
+      prominent(albumCovers(`./${song.Cover}.png`).default, {
         format: "hex",
         amount: 3,
       }).then(function (colors) {
