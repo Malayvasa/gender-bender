@@ -6,7 +6,7 @@ let albumCovers = require.context("../src/assets/albumCovers", true);
 let itemImg = albumCovers(`./${3}.png`).default;
 
 function App() {
-  const [animState, setAnimState] = useState(1);
+  const [animState, setAnimState] = useState(10);
   const advanceState = () => {
     setAnimState(animState + 1);
   };
@@ -445,18 +445,29 @@ function App() {
                     </div>
                     <div className="w-1/2 bg-gray-50 p-12 overflow-scroll">
                       <div className="w-5/6 flex flex-row flex-wrap justify-evenly m-auto gap-2">
-                        {data.map((e) => (
-                          <div
-                            className="w-24 h-24 bg-gray-300 border-gray-500"
-                            onClick={advanceState}
-                            style={{
-                              backgroundImage: `url(${
-                                albumCovers(`./${e.Cover}.png`).default
-                              })`,
-                              backgroundSize: "100%",
-                            }}
-                          ></div>
-                        ))}
+                        {data.map((e) => {
+                          const del = e.Cover * 0.05;
+                          console.log(del);
+                          return (
+                            <motion.div
+                              initial={{ y: "-10%", opacity: 0 }}
+                              animate={{ y: "0%", opacity: 1 }}
+                              transition={{
+                                ease: "easeIn",
+                                duration: 0.8,
+                                delay: del,
+                              }}
+                              className="w-24 h-24 bg-gray-300 border-gray-500"
+                              onClick={advanceState}
+                              style={{
+                                backgroundImage: `url(${
+                                  albumCovers(`./${e.Cover}.png`).default
+                                })`,
+                                backgroundSize: "100%",
+                              }}
+                            ></motion.div>
+                          );
+                        })}
                       </div>
                     </div>
                   </div>
@@ -527,7 +538,14 @@ function App() {
                         {data.map((song) => {
                           return (
                             <>
-                              <div
+                              <motion.div
+                                initial={{ y: "0%", opacity: 1 }}
+                                animate={{ y: "0%", opacity: 0 }}
+                                transition={{
+                                  ease: "easeOut",
+                                  duration: 1,
+                                  delay: 0.5,
+                                }}
                                 className="w-24 h-24 bg-gray-300 border-gray-500"
                                 onClick={advanceState}
                                 style={{
@@ -536,14 +554,14 @@ function App() {
                                   })`,
                                   backgroundSize: "100%",
                                 }}
-                              ></div>
+                              ></motion.div>
                               <motion.div
                                 initial={{ y: "0%", opacity: 0 }}
                                 animate={{ y: "0%", opacity: 1 }}
                                 transition={{
                                   ease: "easeOut",
-                                  duration: 0.5,
-                                  delay: 0.3,
+                                  duration: 0.2,
+                                  delay: 0.8,
                                 }}
                                 className="w-24 h-24 -ml-20 z-50"
                                 style={{
