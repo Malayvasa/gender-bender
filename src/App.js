@@ -6,7 +6,7 @@ let albumCovers = require.context("../src/assets/albumCovers", true);
 let itemImg = albumCovers(`./${3}.png`).default;
 
 function App() {
-  const [animState, setAnimState] = useState(10);
+  const [animState, setAnimState] = useState(0);
   const advanceState = () => {
     setAnimState(animState + 1);
   };
@@ -404,12 +404,19 @@ function App() {
                 ),
                 9: (
                   <div>
-                    <div
+                    <motion.div
+                      initial={{ y: "-10%", opacity: 0 }}
+                      animate={{ y: "0%", opacity: 1 }}
+                      transition={{
+                        ease: "easeIn",
+                        duration: 0.8,
+                        delay: 1.4,
+                      }}
                       className="absolute top-1/2 right-1/4 -mr-32 text-8xl hover:text-gray-200"
                       onClick={advanceState}
                     >
                       ☞
-                    </div>
+                    </motion.div>
                     <div className="mx-auto text-5xl w-max leading-snug place-items-stretch">
                       <div className="flex flex-row">
                         <motion.span
@@ -433,20 +440,46 @@ function App() {
                 10: (
                   <div className="flex h-screen">
                     <div className="text-5xl w-1/2 p-12 leading-snug">
-                      <span className="font-serif">Genre</span> is a category of
-                      music, literature or other forms of art <br></br> based on
-                      some set of criteria.
-                      <div
-                        className="text-8xl w-min hover:text-gray-200"
+                      <motion.div
+                        initial={{ y: "-10%", opacity: 0 }}
+                        animate={{ y: "0%", opacity: 1 }}
+                        transition={{
+                          ease: "easeIn",
+                          duration: 0.8,
+                          delay: 1,
+                        }}
+                      >
+                        <span className="font-serif">Genre</span> is a category
+                        of music, literature or other forms of art <br></br>{" "}
+                        based on some set of criteria.
+                      </motion.div>
+                      <motion.div
+                        initial={{ y: "-10%", opacity: 0 }}
+                        animate={{ y: "0%", opacity: 1 }}
+                        transition={{
+                          ease: "easeIn",
+                          duration: 0.8,
+                          delay: 4,
+                        }}
+                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200"
                         onClick={advanceState}
                       >
                         ☞
-                      </div>
+                      </motion.div>
                     </div>
-                    <div className="w-1/2 bg-gray-50 p-12 overflow-scroll">
+                    <motion.div
+                      initial={{ y: "-10%", opacity: 0 }}
+                      animate={{ y: "0%", opacity: 1 }}
+                      transition={{
+                        ease: "easeIn",
+                        duration: 1,
+                        delay: 0,
+                      }}
+                      className="w-1/2 bg-gray-100 p-12 overflow-scroll"
+                    >
                       <div className="w-5/6 flex flex-row flex-wrap justify-evenly m-auto gap-2">
                         {data.map((e) => {
-                          const del = e.Cover * 0.05;
+                          const del = 1.5 + e.Cover * 0.02;
                           console.log(del);
                           return (
                             <motion.div
@@ -457,7 +490,7 @@ function App() {
                                 duration: 0.8,
                                 delay: del,
                               }}
-                              className="w-24 h-24 bg-gray-300 border-gray-500"
+                              className="w-24 h-24 bg-gray-300 0"
                               onClick={advanceState}
                               style={{
                                 backgroundImage: `url(${
@@ -469,7 +502,7 @@ function App() {
                           );
                         })}
                       </div>
-                    </div>
+                    </motion.div>
                   </div>
                 ),
                 11: (
@@ -481,17 +514,28 @@ function App() {
                         of music, literature or other forms of art <br></br>{" "}
                         based on some set of criteria.
                       </p>
-                      <p className="pt-2">
+                      <motion.p
+                        initial={{ y: "-10%", opacity: 0 }}
+                        animate={{ y: "0%", opacity: 1 }}
+                        transition={{
+                          ease: "easeIn",
+                          duration: 0.8,
+                          delay: 0.3,
+                        }}
+                        className="pt-2"
+                      >
                         {" "}
                         It is a type of communication with socially-agreed-upon
                         conventions developed over time.
-                      </p>
-                      <div
-                        className="text-8xl w-min hover:text-gray-200 font-display"
+                      </motion.p>
+                    </div>
+                    <div>
+                      <motion.div
+                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200"
                         onClick={advanceState}
                       >
                         ☞
-                      </div>
+                      </motion.div>
                     </div>
                     <div className="w-1/2 bg-gray-50 p-12 overflow-scroll">
                       <div className="w-5/6 flex flex-row flex-wrap justify-evenly m-auto gap-2">
@@ -525,9 +569,36 @@ function App() {
                         It is a type of communication with socially-agreed-upon
                         conventions developed over time.
                       </p>
-                      <p className="pt-2"> They can be aesthetic,</p>
+                      <div className="flex">
+                        <motion.div
+                          initial={{ y: "-10%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          transition={{
+                            ease: "easeIn",
+                            duration: 0.8,
+                            delay: 0.3,
+                          }}
+                          className="pt-2"
+                        >
+                          {" "}
+                          They can be{" "}
+                        </motion.div>
+                        <motion.div
+                          initial={{ y: "-10%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          transition={{
+                            ease: "easeIn",
+                            duration: 0.8,
+                            delay: 2,
+                          }}
+                          className="pt-2 pl-4"
+                        >
+                          {" "}
+                          aesthetic,
+                        </motion.div>
+                      </div>
                       <div
-                        className="text-8xl w-min hover:text-gray-200 font-display"
+                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
                         onClick={advanceState}
                       >
                         ☞
@@ -544,7 +615,7 @@ function App() {
                                 transition={{
                                   ease: "easeOut",
                                   duration: 1,
-                                  delay: 0.5,
+                                  delay: 2,
                                 }}
                                 className="w-24 h-24 bg-gray-300 border-gray-500"
                                 onClick={advanceState}
@@ -560,8 +631,8 @@ function App() {
                                 animate={{ y: "0%", opacity: 1 }}
                                 transition={{
                                   ease: "easeOut",
-                                  duration: 0.2,
-                                  delay: 0.8,
+                                  duration: 0.8,
+                                  delay: 2,
                                 }}
                                 className="w-24 h-24 -ml-20 z-50"
                                 style={{
