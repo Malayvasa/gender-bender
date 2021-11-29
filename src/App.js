@@ -6,7 +6,7 @@ let albumCovers = require.context("../src/assets/albumCovers", true);
 let itemImg = albumCovers(`./${3}.png`).default;
 
 function App() {
-  const [animState, setAnimState] = useState(14);
+  const [animState, setAnimState] = useState(1);
   const [currentHoverColor, setCurrentHoverColor] = useState("#000");
   const [currentSongObject, setCurrentSongObject] = useState(null);
   const advanceState = () => {
@@ -482,7 +482,7 @@ function App() {
                 ),
                 10: (
                   <div className="flex h-screen">
-                    <div className="text-5xl w-1/2 p-12 leading-none">
+                    <div className="text-4xl w-1/2 p-12 leading-none">
                       <motion.div
                         initial={{ y: "-10%", opacity: 0 }}
                         animate={{ y: "0%", opacity: 1 }}
@@ -550,7 +550,7 @@ function App() {
                 ),
                 11: (
                   <div className="flex h-screen">
-                    <div className="text-5xl w-1/2 p-12 leading-none">
+                    <div className="text-4xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span className="font-serif">Genre</span> is a category
@@ -600,7 +600,7 @@ function App() {
                 ),
                 12: (
                   <div className="flex h-screen">
-                    <div className="text-5xl w-1/2 p-12 leading-none">
+                    <div className="text-4xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -736,7 +736,7 @@ function App() {
                 ),
                 13: (
                   <div className="flex h-screen">
-                    <div className="text-5xl w-1/2 p-12 leading-none">
+                    <div className="text-4xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -766,7 +766,7 @@ function App() {
                             duration: 0.8,
                             delay: 1,
                           }}
-                          className=""
+                          className="pt-4"
                           style={{ color: `${currentHoverColor}` }}
                         >
                           {" "}
@@ -855,7 +855,7 @@ function App() {
                 ),
                 14: (
                   <div className="flex h-screen">
-                    <div className="text-5xl w-1/2 p-12 leading-none">
+                    <div className="text-4xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -877,7 +877,7 @@ function App() {
                       <div className="flex flex-wrap w-auto">
                         <div className="pt-4"> They can be </div>
                         <div className="pt-4 pl-4"> aesthetic,</div>
-                        <div className=""> communicative, </div>
+                        <div className="pt-4"> communicative, </div>
                         <motion.div
                           initial={{ y: "-10%", opacity: 0 }}
                           animate={{ y: "0%", opacity: 1 }}
@@ -981,7 +981,7 @@ function App() {
                 ),
                 15: (
                   <div className="flex h-screen">
-                    <div className="text-5xl w-1/2 p-12 leading-none">
+                    <div className="text-4xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -1003,7 +1003,7 @@ function App() {
                       <div className="flex flex-wrap w-auto">
                         <div className="pt-4"> They can be </div>
                         <div className="pt-4 pl-4"> aesthetic,</div>
-                        <div className=""> communicative, </div>
+                        <div className="pt-4"> communicative, </div>
                         <div className="pl-2"> or functional.</div>
                       </div>
                       <motion.div
@@ -1112,6 +1112,191 @@ function App() {
                           );
                         })}
                       </div>
+                    </div>
+                  </div>
+                ),
+                16: (
+                  <div className="flex h-screen">
+                    <div className="text-4xl w-1/2 p-12 leading-none">
+                      <p>
+                        {" "}
+                        <span
+                          className="font-serif"
+                          style={{
+                            color: `${currentHoverColor}`,
+                          }}
+                        >
+                          Genre
+                        </span>{" "}
+                        is a category of music, literature or other forms of art{" "}
+                        <br></br> based on some set of criteria.
+                      </p>
+                      <p className="pt-4">
+                        {" "}
+                        It is a type of communication with socially-agreed-upon
+                        conventions developed over time.
+                      </p>
+                      <div className="flex flex-wrap w-auto">
+                        <div className="pt-4"> They can be </div>
+                        <div className="pt-4 pl-4"> aesthetic,</div>
+                        <div className="pt-4"> communicative, </div>
+                        <div className="pl-2"> or functional.</div>
+                      </div>
+                      <div className="pt-4">
+                        <span
+                          className="font-serif"
+                          style={{
+                            color: `${currentHoverColor}`,
+                          }}
+                        >
+                          Genres
+                        </span>{" "}
+                        change over time as cultures invent new genres and
+                        discontinue the use of old ones.
+                      </div>
+                      <motion.div
+                        className="pt-4"
+                        initial={{ y: "-10%", opacity: 0 }}
+                        animate={{ y: "0%", opacity: 1 }}
+                        transition={{
+                          ease: "easeIn",
+                          duration: 0.8,
+                          delay: 2,
+                        }}
+                      >
+                        Often, identities merge into multiple genres by way of
+                        borrowing and recombining these conventions.
+                      </motion.div>
+
+                      <div
+                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        onClick={advanceState}
+                        style={{ color: `${currentHoverColor}` }}
+                      >
+                        ☞
+                      </div>
+                    </div>
+                    <div className="w-1/2 bg-gray-50 p-12 overflow-scroll">
+                      <div className="w-5/6 flex flex-row flex-wrap justify-evenly m-auto gap-2">
+                        {data.map((song, index) => {
+                          return (
+                            <>
+                              <div className="w-24 h-24">
+                                <motion.div
+                                  initial={{ y: "0%", opacity: 1 }}
+                                  animate={{ y: "0%", opacity: 0 }}
+                                  transition={{
+                                    ease: "easeOut",
+                                    duration: 0.8,
+                                    delay: 2.4,
+                                  }}
+                                  className="w-24 h-24"
+                                  style={{
+                                    backgroundColor: `${sortedYearArray[index].ProminentColor1}`,
+                                  }}
+                                ></motion.div>
+                              </div>
+                              <div className="w-24 h-24 -ml-20 z-10 filter blur-2xl saturate-150">
+                                <motion.div
+                                  initial={{ y: "0%", opacity: 0 }}
+                                  animate={{ y: "0%", opacity: 1 }}
+                                  transition={{
+                                    ease: "easeOut",
+                                    duration: 0.8,
+                                    delay: 2.4,
+                                  }}
+                                  className="w-24 h-24"
+                                  style={{
+                                    backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
+                                  }}
+                                  onMouseEnter={() => {
+                                    setCurrentHoverColor(
+                                      sortedHexArray[index].ProminentColor1
+                                    );
+                                    setCurrentSongObject(sortedHexArray[index]);
+                                  }}
+                                  onMouseLeave={() => {
+                                    setCurrentHoverColor("#000");
+                                    setCurrentSongObject(null);
+                                  }}
+                                ></motion.div>
+                              </div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                ),
+                17: (
+                  <div className="flex h-screen">
+                    <div className="absolute w-full h-screen bg-gray-900 p-12 overflow-scroll">
+                      <div className="w-full flex flex-row flex-wrap justify-evenly m-auto gap-2 opacity-80">
+                        {data.map((song, index) => {
+                          return (
+                            <>
+                              <motion.div
+                                initial={{ y: "0%", opacity: 0 }}
+                                animate={{ y: "0%", opacity: 1 }}
+                                transition={{
+                                  ease: "easeOut",
+                                  duration: 0.3,
+                                  delay: 0,
+                                }}
+                                className="w-48 h-48 -ml-20 z-10 filter blur-3xl saturate-100"
+                                style={{
+                                  backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
+                                }}
+                                onMouseEnter={() => {
+                                  setCurrentHoverColor(
+                                    sortedHexArray[index].ProminentColor1
+                                  );
+                                  setCurrentSongObject(sortedHexArray[index]);
+                                }}
+                                onMouseLeave={() => {
+                                  setCurrentHoverColor("#000");
+                                  setCurrentSongObject(null);
+                                }}
+                              ></motion.div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="z-50 text-4xl w-1/2 p-12 leading-none text-gray-50">
+                      <p>
+                        {" "}
+                        <span className="font-serif">Genre</span> is a category
+                        of music, literature or other forms of art <br></br>{" "}
+                        based on some set of criteria.
+                      </p>
+                      <p className="pt-4">
+                        {" "}
+                        It is a type of communication with socially-agreed-upon
+                        conventions developed over time.
+                      </p>
+                      <div className="flex flex-wrap w-auto">
+                        <div className="pt-4"> They can be </div>
+                        <div className="pt-4 pl-4"> aesthetic,</div>
+                        <div className="pt-4"> communicative, </div>
+                        <div className="pl-2"> or functional.</div>
+                      </div>
+                      <div className="pt-4">
+                        <span className="font-serif">Genres</span> change over
+                        time as cultures invent new genres and discontinue the
+                        use of old ones.
+                      </div>
+                      <div className="pt-4">
+                        Often, identities merge into multiple genres by way of
+                        borrowing and recombining these conventions.
+                      </div>
+
+                      {/* <div
+                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        onClick={advanceState}
+                      >
+                        ☞
+                      </div> */}
                     </div>
                   </div>
                 ),
