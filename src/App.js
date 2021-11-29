@@ -1,34 +1,60 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { prominent } from "color.js";
+import convert from "color-convert";
 import data from "./data";
 let albumCovers = require.context("../src/assets/albumCovers", true);
 let itemImg = albumCovers(`./${3}.png`).default;
 
 function App() {
-  const [animState, setAnimState] = useState(1);
+  const [animState, setAnimState] = useState(14);
+  const [currentHoverColor, setCurrentHoverColor] = useState("#000");
+  const [currentSongObject, setCurrentSongObject] = useState(null);
   const advanceState = () => {
     setAnimState(animState + 1);
   };
-  const colorArray = [];
 
-  //function to go through albums and get average color of each song
-  const getAverageColor = () => {
-    data.forEach((song) => {
-      prominent(albumCovers(`./${song.Cover}.png`).default, {
-        format: "hex",
-        amount: 3,
-      }).then(function (colors) {
-        colorArray.push("id:" + song.Cover + " " + colors);
-      });
-      // console.log(color);
-      // let colorObject = { id: song.Cover, color: color };
+  //function to sort array of hex values by hue and brightness
+  const sortHue = () => {
+    let array = data.map((item) => item);
+    let sortedArray = array.sort((a, b) => {
+      let aHue = convert.hex.hsl(a.ProminentColor1)[0];
+      let bHue = convert.hex.hsl(b.ProminentColor1)[0];
+      let aBrightness = convert.hex.hsl(a.ProminentColor1)[2];
+      let bBrightness = convert.hex.hsl(b.ProminentColor1)[2];
+      if (aHue > bHue) {
+        return 1;
+      } else if (aHue < bHue) {
+        return -1;
+      } else if (aBrightness > bBrightness) {
+        return 1;
+      } else if (aBrightness < bBrightness) {
+        return -1;
+      } else {
+        return 0;
+      }
     });
+    return sortedArray;
   };
 
-  getAverageColor();
+  //function to sort array of songs by location
+  const sortLocation = () => {
+    let array = data.map((item) => item);
+    let sortedArray = array.sort((a, b) => {
+      let aLocation = a.Region;
+      let bLocation = b.Region;
+      if (aLocation > bLocation) {
+        return 1;
+      } else if (aLocation < bLocation) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    return sortedArray;
+  };
 
-  console.log(colorArray);
+  const sortedHexArray = sortHue();
+  const sortedLocationArray = sortLocation();
 
   return (
     <div>
@@ -43,7 +69,6 @@ function App() {
                       <motion.div
                         initial={{ y: "-20%", opacity: 0 }}
                         animate={{ y: "0%", opacity: 1 }}
-                        exit={{ x: "20%", opacity: 0 }}
                         transition={{ ease: "easeOut", duration: 1, delay: 1 }}
                       >
                         SO,
@@ -480,7 +505,7 @@ function App() {
                       <div className="w-5/6 flex flex-row flex-wrap justify-evenly m-auto gap-2">
                         {data.map((e) => {
                           const del = 1.5 + e.Cover * 0.02;
-                          console.log(del);
+
                           return (
                             <motion.div
                               initial={{ y: "-10%", opacity: 0 }}
@@ -560,9 +585,16 @@ function App() {
                     <div className="text-5xl w-1/2 p-12 leading-snug">
                       <p>
                         {" "}
-                        <span className="font-serif">Genre</span> is a category
-                        of music, literature or other forms of art <br></br>{" "}
-                        based on some set of criteria.
+                        <span
+                          className="font-serif"
+                          style={{
+                            color: `${currentHoverColor}`,
+                          }}
+                        >
+                          Genre
+                        </span>{" "}
+                        is a category of music, literature or other forms of art{" "}
+                        <br></br> based on some set of criteria.
                       </p>
                       <p className="pt-2">
                         {" "}
@@ -592,14 +624,40 @@ function App() {
                             delay: 2,
                           }}
                           className="pt-2 pl-4"
+                          style={{ color: `${currentHoverColor}` }}
                         >
                           {" "}
                           aesthetic,
                         </motion.div>
+                        <AnimatePresence>
+                          {currentSongObject && (
+                            <motion.div
+                              initial={{ y: "-10%", opacity: 0 }}
+                              animate={{ y: "0%", opacity: 1 }}
+                              exit={{ y: "-10%", opacity: 0 }}
+                              transition={{
+                                ease: "easeIn",
+                                duration: 0.3,
+                                delay: 0,
+                              }}
+                              className="w-64 h-8 text-sm z-50"
+                            >
+                              <div className="flex flex-col justify-between">
+                                <div className="text-xl capitalize font-serif">
+                                  {currentSongObject.Genre}
+                                </div>
+                                <div className="text-sm capitalize font-serif">
+                                  {currentSongObject.SongName}
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </div>
                       <div
                         className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
                         onClick={advanceState}
+                        style={{ color: `${currentHoverColor}` }}
                       >
                         ☞
                       </div>
@@ -609,21 +667,142 @@ function App() {
                         {data.map((song) => {
                           return (
                             <>
+                              <div className="w-24 h-24">
+                                <motion.div
+                                  className="w-24 h-24"
+                                  initial={{ y: "0%", opacity: 1 }}
+                                  animate={{ y: "0%", opacity: 0 }}
+                                  transition={{
+                                    ease: "easeOut",
+                                    duration: 1,
+                                    delay: 2,
+                                  }}
+                                  onClick={advanceState}
+                                  style={{
+                                    backgroundImage: `url(${
+                                      albumCovers(`./${song.Cover}.png`).default
+                                    })`,
+                                    backgroundSize: "100%",
+                                  }}
+                                ></motion.div>
+                              </div>
+                              <div className="w-24 h-24 -ml-20 z-10">
+                                <motion.div
+                                  className="w-24 h-24"
+                                  initial={{ y: "0%", opacity: 0 }}
+                                  animate={{ y: "0%", opacity: 1 }}
+                                  transition={{
+                                    ease: "easeOut",
+                                    duration: 0.8,
+                                    delay: 2,
+                                  }}
+                                  style={{
+                                    backgroundColor: `${song.ProminentColor1}`,
+                                  }}
+                                  onMouseEnter={() => {
+                                    setCurrentHoverColor(song.ProminentColor1);
+                                    setCurrentSongObject(song);
+                                  }}
+                                  onMouseLeave={() => {
+                                    setCurrentHoverColor("#000");
+                                    setCurrentSongObject(null);
+                                  }}
+                                ></motion.div>
+                              </div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                ),
+                13: (
+                  <div className="flex h-screen">
+                    <div className="text-5xl w-1/2 p-12 leading-snug">
+                      <p>
+                        {" "}
+                        <span
+                          className="font-serif"
+                          style={{
+                            color: `${currentHoverColor}`,
+                          }}
+                        >
+                          Genre
+                        </span>{" "}
+                        is a category of music, literature or other forms of art{" "}
+                        <br></br> based on some set of criteria.
+                      </p>
+                      <p className="pt-2">
+                        {" "}
+                        It is a type of communication with socially-agreed-upon
+                        conventions developed over time.
+                      </p>
+                      <div className="flex flex-wrap">
+                        <div className="pt-2"> They can be </div>
+                        <div className="pt-2 pl-4"> aesthetic,</div>
+                        <motion.div
+                          initial={{ y: "-10%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          transition={{
+                            ease: "easeIn",
+                            duration: 0.8,
+                            delay: 2,
+                          }}
+                          className=""
+                          style={{ color: `${currentHoverColor}` }}
+                        >
+                          {" "}
+                          communicative,
+                        </motion.div>
+                        <AnimatePresence>
+                          {currentSongObject && (
+                            <motion.div
+                              initial={{ y: "-10%", opacity: 0 }}
+                              animate={{ y: "0%", opacity: 1 }}
+                              exit={{ y: "-10%", opacity: 0 }}
+                              transition={{
+                                ease: "easeIn",
+                                duration: 0.3,
+                                delay: 0,
+                              }}
+                              className="w-64 h-8 text-sm z-50"
+                            >
+                              <div className="flex flex-col justify-between">
+                                <div className="text-xl capitalize font-serif">
+                                  {currentSongObject.Genre}
+                                </div>
+                                <div className="text-sm capitalize font-serif">
+                                  {currentSongObject.SongName}
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                      <div
+                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        onClick={advanceState}
+                        style={{ color: `${currentHoverColor}` }}
+                      >
+                        ☞
+                      </div>
+                    </div>
+                    <div className="w-1/2 bg-gray-50 p-12 overflow-scroll">
+                      <div className="w-5/6 flex flex-row flex-wrap justify-evenly m-auto gap-2">
+                        {data.map((song, index) => {
+                          return (
+                            <>
                               <motion.div
                                 initial={{ y: "0%", opacity: 1 }}
                                 animate={{ y: "0%", opacity: 0 }}
                                 transition={{
                                   ease: "easeOut",
-                                  duration: 1,
+                                  duration: 0.8,
                                   delay: 2,
                                 }}
-                                className="w-24 h-24 bg-gray-300 border-gray-500"
-                                onClick={advanceState}
+                                className="w-24 h-24"
                                 style={{
-                                  backgroundImage: `url(${
-                                    albumCovers(`./${song.Cover}.png`).default
-                                  })`,
-                                  backgroundSize: "100%",
+                                  backgroundColor: `${song.ProminentColor1}`,
                                 }}
                               ></motion.div>
                               <motion.div
@@ -632,11 +811,143 @@ function App() {
                                 transition={{
                                   ease: "easeOut",
                                   duration: 0.8,
-                                  delay: 2,
+                                  delay: 2.4,
                                 }}
-                                className="w-24 h-24 -ml-20 z-50"
+                                className="w-24 h-24 -ml-20 z-10"
                                 style={{
-                                  backgroundColor: `${song.AverageColor}`,
+                                  backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
+                                }}
+                                onMouseEnter={() => {
+                                  setCurrentHoverColor(
+                                    sortedHexArray[index].ProminentColor1
+                                  );
+                                  setCurrentSongObject(sortedHexArray[index]);
+                                }}
+                                onMouseLeave={() => {
+                                  setCurrentHoverColor("#000");
+                                  setCurrentSongObject(null);
+                                }}
+                              ></motion.div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                ),
+                14: (
+                  <div className="flex h-screen">
+                    <div className="text-5xl w-1/2 p-12 leading-snug">
+                      <p>
+                        {" "}
+                        <span
+                          className="font-serif"
+                          style={{
+                            color: `${currentHoverColor}`,
+                          }}
+                        >
+                          Genre
+                        </span>{" "}
+                        is a category of music, literature or other forms of art{" "}
+                        <br></br> based on some set of criteria.
+                      </p>
+                      <p className="pt-2">
+                        {" "}
+                        It is a type of communication with socially-agreed-upon
+                        conventions developed over time.
+                      </p>
+                      <div className="flex flex-wrap w-auto">
+                        <div className="pt-2"> They can be </div>
+                        <div className="pt-2 pl-4"> aesthetic,</div>
+                        <div className=""> communicative, </div>
+                        <motion.div
+                          initial={{ y: "-10%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          transition={{
+                            ease: "easeIn",
+                            duration: 0.8,
+                            delay: 2,
+                          }}
+                          className="pl-2"
+                          style={{ color: `${currentHoverColor}` }}
+                        >
+                          {" "}
+                          or functional.
+                          <AnimatePresence>
+                            {currentSongObject && (
+                              <motion.div
+                                initial={{ y: "-10%", opacity: 0 }}
+                                animate={{ y: "0%", opacity: 1 }}
+                                exit={{ y: "-10%", opacity: 0 }}
+                                transition={{
+                                  ease: "easeIn",
+                                  duration: 0.3,
+                                  delay: 0,
+                                }}
+                                className="w-64 h-8 text-sm z-50"
+                              >
+                                <div className="flex flex-col justify-between">
+                                  <div className="text-xl capitalize font-serif">
+                                    {currentSongObject.Region}
+                                  </div>
+                                  <div className="text-sm capitalize font-serif">
+                                    {currentSongObject.Genre}
+                                  </div>
+                                </div>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </motion.div>
+                      </div>
+                      <div
+                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        onClick={advanceState}
+                        style={{ color: `${currentHoverColor}` }}
+                      >
+                        ☞
+                      </div>
+                    </div>
+                    <div className="w-1/2 bg-gray-50 p-12 overflow-scroll">
+                      <div className="w-5/6 flex flex-row flex-wrap justify-evenly m-auto gap-2">
+                        {data.map((song, index) => {
+                          return (
+                            <>
+                              <motion.div
+                                initial={{ y: "0%", opacity: 1 }}
+                                animate={{ y: "0%", opacity: 0 }}
+                                transition={{
+                                  ease: "easeOut",
+                                  duration: 0.8,
+                                  delay: 2.4,
+                                }}
+                                className="w-24 h-24"
+                                style={{
+                                  backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
+                                }}
+                              ></motion.div>
+                              <motion.div
+                                initial={{ y: "0%", opacity: 0 }}
+                                animate={{ y: "0%", opacity: 1 }}
+                                transition={{
+                                  ease: "easeOut",
+                                  duration: 0.8,
+                                  delay: 2.4,
+                                }}
+                                className="w-24 h-24 -ml-20 z-10"
+                                style={{
+                                  backgroundColor: `${sortedLocationArray[index].ProminentColor1}`,
+                                }}
+                                onMouseEnter={() => {
+                                  setCurrentHoverColor(
+                                    sortedLocationArray[index].ProminentColor1
+                                  );
+                                  setCurrentSongObject(
+                                    sortedLocationArray[index]
+                                  );
+                                }}
+                                onMouseLeave={() => {
+                                  setCurrentHoverColor("#000");
+                                  setCurrentSongObject(null);
                                 }}
                               ></motion.div>
                             </>
