@@ -53,7 +53,7 @@ const secondSongList = [
 ];
 
 function App() {
-  const [animState, setAnimState] = useState(15);
+  const [animState, setAnimState] = useState(1);
   const [firstSelectedSong, setFirstSelectedSong] = useState(firstSongList[0]);
   const [secondSelectedSong, setSecondSelectedSong] = useState(
     secondSongList[0]
