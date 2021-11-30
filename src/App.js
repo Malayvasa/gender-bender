@@ -3,14 +3,69 @@ import { useState } from "react";
 import convert from "color-convert";
 import data from "./data";
 let albumCovers = require.context("../src/assets/albumCovers", true);
-let itemImg = albumCovers(`./${3}.png`).default;
+let sixAlbums = require.context("../src/assets/sixAlbums", true);
+const firstSongList = [
+  {
+    SongName: "Monkeys With 5G",
+    Artist: "Arivu & Anto franklin",
+    Genre: "Tamil Rap, Hip-Hop",
+    ReleaseYear: 2020,
+    Cover: 1,
+  },
+  {
+    SongName: "La Llorona (feat. Los Macorinos)",
+    Artist: "Natalia Lafourcade",
+    Genre: "Latin/Mexican Pop, Folk",
+    ReleaseYear: 2018,
+    Cover: 2,
+  },
+  {
+    SongName: "Nee-Namah",
+    Artist: "Thaikkudam Bridge",
+    Genre: "Indian Rock, Heavy Metal, Reggae",
+    ReleaseYear: 2019,
+    Cover: 3,
+  },
+];
+
+const secondSongList = [
+  {
+    SongName: "Selfish",
+    Artist: "Little Simz",
+    Genre: "Hip-Hop, Rap, Jazz Rap, UK Rap",
+    ReleaseYear: 2019,
+    Cover: 4,
+  },
+  {
+    SongName: "Cumbai Espacial",
+    Artist: "Ondaropica",
+    Genre: "Afro-Caribbean Ska, Funk, Jazz",
+    ReleaseYear: 2012,
+    Cover: 5,
+  },
+  {
+    SongName: "Little Dear",
+    Artist: "Spellling",
+    Genre: "Progressive Pop, Experimental Pop",
+    ReleaseYear: 2021,
+    Cover: 6,
+  },
+];
 
 function App() {
-  const [animState, setAnimState] = useState(1);
+  const [animState, setAnimState] = useState(15);
+  const [firstSelectedSong, setFirstSelectedSong] = useState(firstSongList[0]);
+  const [secondSelectedSong, setSecondSelectedSong] = useState(
+    secondSongList[0]
+  );
+
   const [currentHoverColor, setCurrentHoverColor] = useState("#000");
   const [currentSongObject, setCurrentSongObject] = useState(null);
   const advanceState = () => {
     setAnimState(animState + 1);
+  };
+  const previousState = () => {
+    setAnimState(animState - 1);
   };
 
   //function to sort array of hex values by hue and brightness
@@ -76,6 +131,28 @@ function App() {
 
   return (
     <div>
+      {animState !== 1 && (
+        <div
+          className="absolute items-stretch content-center p-2 m-2 bg-white text-center rounded-full 
+     border-gray-300 text-gray-300 hover:text-gray-900 hover:border-gray-900 border-2"
+          onClick={previousState}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+        </div>
+      )}
       <div
         className="flex w-screen min-h-screen items-center"
         style={{ fontVariantLigatures: "none" }}
@@ -119,9 +196,9 @@ function App() {
                       <motion.div
                         initial={{ x: "0%", y: "-20%", opacity: 0 }}
                         animate={{ y: "0%", opacity: 1 }}
-                        transition={{ ease: "easeOut", duration: 1, delay: 6 }}
+                        transition={{ ease: "easeOut", duration: 1, delay: 5 }}
                         whileHover={{ x: "20%" }}
-                        className="select-none w-min text-8xl"
+                        className="select-none w-min text-8xl hover:text-gray-200"
                         onClick={advanceState}
                       >
                         ☞
@@ -152,22 +229,23 @@ function App() {
                       transition={{ ease: "easeOut", duration: 1, delay: 3 }}
                       className="flex flex-row justify-between text-8x pt-8"
                     >
-                      <div
-                        className="w-36 h-36 bg-gray-300"
-                        onClick={advanceState}
-                        style={{
-                          backgroundImage: `url(${itemImg})`,
-                          backgroundSize: "100%",
-                        }}
-                      ></div>
-                      <div
-                        className="w-36 h-36 bg-gray-400"
-                        onClick={advanceState}
-                      ></div>
-                      <div
-                        className="w-36 h-36 bg-gray-500"
-                        onClick={advanceState}
-                      ></div>
+                      {firstSongList.map((item, index) => {
+                        return (
+                          <div
+                            className="w-36 h-36 bg-gray-300"
+                            onClick={() => {
+                              setFirstSelectedSong(item);
+                              advanceState();
+                            }}
+                            style={{
+                              backgroundImage: `url(${
+                                sixAlbums(`./${item.Cover}.png`).default
+                              })`,
+                              backgroundSize: "100%",
+                            }}
+                          ></div>
+                        );
+                      })}
                     </motion.div>
                   </div>
                 ),
@@ -180,9 +258,9 @@ function App() {
                         transition={{
                           ease: "easeOut",
                           duration: 1,
-                          delay: 3,
+                          delay: 2,
                         }}
-                        className="absolute top-0 left-1/2 -ml-8 mt-32 text-8xl hover:text-gray-200"
+                        className="select-none absolute top-0 left-1/2 -ml-8 mt-32 text-8xl hover:text-gray-200"
                         onClick={advanceState}
                       >
                         ☞
@@ -199,11 +277,23 @@ function App() {
                         }}
                         className="flex flex-row space-x-8"
                       >
-                        <div className="w-36 h-36 bg-gray-500"></div>
+                        <div
+                          className="w-36 h-36 bg-gray-500"
+                          style={{
+                            backgroundImage: `url(${
+                              sixAlbums(`./${firstSelectedSong.Cover}.png`)
+                                .default
+                            })`,
+                            backgroundSize: "100%",
+                          }}
+                        ></div>
                         <div>
-                          <motion.div>NEO-SOUL/HIP HOP</motion.div>
+                          <motion.div>{firstSelectedSong.Genre}</motion.div>
                           <div className="text-gray-300 text-3xl">
-                            Nina<br></br>Wayne Snow (2021)
+                            {firstSelectedSong.SongName}
+                            <br></br>
+                            {firstSelectedSong.Artist} (
+                            {firstSelectedSong.ReleaseYear})
                           </div>
                         </div>
                       </motion.div>
@@ -233,18 +323,23 @@ function App() {
                         transition={{ ease: "easeOut", duration: 1, delay: 2 }}
                         className="flex flex-row justify-between text-8x pt-8"
                       >
-                        <div
-                          className="w-36 h-36 bg-gray-300"
-                          onClick={advanceState}
-                        ></div>
-                        <div
-                          className="w-36 h-36 bg-gray-400"
-                          onClick={advanceState}
-                        ></div>
-                        <div
-                          className="w-36 h-36 bg-gray-500"
-                          onClick={advanceState}
-                        ></div>
+                        {secondSongList.map((item, index) => {
+                          return (
+                            <div
+                              className="w-36 h-36 bg-gray-300"
+                              onClick={() => {
+                                setSecondSelectedSong(item);
+                                advanceState();
+                              }}
+                              style={{
+                                backgroundImage: `url(${
+                                  sixAlbums(`./${item.Cover}.png`).default
+                                })`,
+                                backgroundSize: "100%",
+                              }}
+                            ></div>
+                          );
+                        })}
                       </motion.div>
                     </div>
                   </div>
@@ -259,7 +354,7 @@ function App() {
                         duration: 1,
                         delay: 2,
                       }}
-                      className="absolute bottom-0 left-1/4 -ml-8 mb-64 text-8xl hover:text-gray-200"
+                      className="select-none absolute bottom-0 left-1/4 -ml-8 mb-64 text-8xl hover:text-gray-200"
                       onClick={advanceState}
                     >
                       ☞
@@ -275,11 +370,23 @@ function App() {
                         }}
                         className="flex flex-row space-x-8"
                       >
-                        <div className="w-36 h-36 bg-gray-300"></div>
+                        <div
+                          className="w-36 h-36 bg-gray-500"
+                          style={{
+                            backgroundImage: `url(${
+                              sixAlbums(`./${secondSelectedSong.Cover}.png`)
+                                .default
+                            })`,
+                            backgroundSize: "100%",
+                          }}
+                        ></div>
                         <div>
-                          <div>POP/ROCK</div>
+                          <motion.div>{secondSelectedSong.Genre}</motion.div>
                           <div className="text-gray-300 text-3xl">
-                            For the Miner<br></br>Samantha Crain (2014)
+                            {secondSelectedSong.SongName}
+                            <br></br>
+                            {secondSelectedSong.Artist} (
+                            {secondSelectedSong.ReleaseYear})
                           </div>
                         </div>
                       </motion.div>
@@ -297,7 +404,7 @@ function App() {
                           duration: 1,
                           delay: 5,
                         }}
-                        className="absolute top-0 right-1/4 -ml-8 mt-64 text-8xl hover:text-gray-200"
+                        className="select-none absolute top-0 right-1/4 -ml-8 mt-64 text-8xl hover:text-gray-200"
                         onClick={advanceState}
                       >
                         ☞
@@ -356,7 +463,7 @@ function App() {
                         duration: 1,
                         delay: 4,
                       }}
-                      className="absolute bottom-0 right-1/4 -ml-8 mb-64 text-8xl hover:text-gray-200"
+                      className="select-none absolute bottom-0 right-1/4 -ml-8 mb-64 text-8xl hover:text-gray-200"
                       onClick={advanceState}
                     >
                       ☞
@@ -413,7 +520,7 @@ function App() {
                           duration: 1,
                           delay: 2,
                         }}
-                        className="absolute top-0 left-1/4 -ml-8 mt-72 text-8xl hover:text-gray-200"
+                        className="select-none absolute top-0 left-1/4 -ml-8 mt-72 text-8xl hover:text-gray-200"
                         onClick={advanceState}
                       >
                         ☞
@@ -456,9 +563,9 @@ function App() {
                       transition={{
                         ease: "easeIn",
                         duration: 0.8,
-                        delay: 1.4,
+                        delay: 1.2,
                       }}
-                      className="absolute top-1/2 right-1/4 -mr-32 text-8xl hover:text-gray-200"
+                      className="select-none absolute top-1/2 right-1/4 -mr-32 text-8xl hover:text-gray-200"
                       onClick={advanceState}
                     >
                       ☞
@@ -505,9 +612,9 @@ function App() {
                         transition={{
                           ease: "easeIn",
                           duration: 0.8,
-                          delay: 4,
+                          delay: 3.5,
                         }}
-                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200"
+                        className="select-none absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200"
                         onClick={advanceState}
                       >
                         ☞
@@ -577,7 +684,7 @@ function App() {
                     </div>
                     <div>
                       <motion.div
-                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200"
+                        className="select-none absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200"
                         onClick={advanceState}
                       >
                         ☞
@@ -676,9 +783,8 @@ function App() {
                         </AnimatePresence>
                       </div>
                       <div
-                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        className="select-none absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
                         onClick={advanceState}
-                        style={{ color: `${currentHoverColor}` }}
                       >
                         ☞
                       </div>
@@ -801,9 +907,8 @@ function App() {
                         </AnimatePresence>
                       </div>
                       <div
-                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        className=" select-none absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
                         onClick={advanceState}
-                        style={{ color: `${currentHoverColor}` }}
                       >
                         ☞
                       </div>
@@ -887,7 +992,7 @@ function App() {
                           transition={{
                             ease: "easeIn",
                             duration: 0.8,
-                            delay: 2,
+                            delay: 1,
                           }}
                           className="pl-2"
                           style={{ color: `${currentHoverColor}` }}
@@ -921,9 +1026,8 @@ function App() {
                         </motion.div>
                       </div>
                       <div
-                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        className="select-none absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
                         onClick={advanceState}
-                        style={{ color: `${currentHoverColor}` }}
                       >
                         ☞
                       </div>
@@ -1016,7 +1120,7 @@ function App() {
                         transition={{
                           ease: "easeIn",
                           duration: 0.8,
-                          delay: 2,
+                          delay: 1,
                         }}
                       >
                         <span
@@ -1062,9 +1166,8 @@ function App() {
                         )}
                       </AnimatePresence>
                       <div
-                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        className="select-none absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
                         onClick={advanceState}
-                        style={{ color: `${currentHoverColor}` }}
                       >
                         ☞
                       </div>
@@ -1080,7 +1183,7 @@ function App() {
                                 transition={{
                                   ease: "easeOut",
                                   duration: 0.8,
-                                  delay: 2.4,
+                                  delay: 1.4,
                                 }}
                                 className="w-24 h-24"
                                 style={{
@@ -1094,7 +1197,7 @@ function App() {
                                 transition={{
                                   ease: "easeOut",
                                   duration: 0.8,
-                                  delay: 2.4,
+                                  delay: 1.4,
                                 }}
                                 className="w-24 h-24 -ml-20 z-10"
                                 style={{
@@ -1164,7 +1267,7 @@ function App() {
                         transition={{
                           ease: "easeIn",
                           duration: 0.8,
-                          delay: 2,
+                          delay: 1,
                         }}
                       >
                         Often, identities fit into multiple genres by way of
@@ -1172,9 +1275,8 @@ function App() {
                       </motion.div>
 
                       <div
-                        className="absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
+                        className="select-none absolute bottom-0 left-0 m-12 text-8xl w-min hover:text-gray-200 font-display"
                         onClick={advanceState}
-                        style={{ color: `${currentHoverColor}` }}
                       >
                         ☞
                       </div>
@@ -1191,7 +1293,7 @@ function App() {
                                   transition={{
                                     ease: "easeOut",
                                     duration: 0.8,
-                                    delay: 2.4,
+                                    delay: 1.4,
                                   }}
                                   className="w-24 h-24"
                                   style={{
@@ -1206,7 +1308,7 @@ function App() {
                                   transition={{
                                     ease: "easeOut",
                                     duration: 0.8,
-                                    delay: 2.4,
+                                    delay: 1.4,
                                   }}
                                   className="w-24 h-24"
                                   style={{
@@ -1342,7 +1444,7 @@ function App() {
                         animate={{ y: "0%", opacity: 1 }}
                         transition={{
                           ease: "easeIn",
-                          duration: 0.3,
+                          duration: 0.8,
                           delay: 15,
                         }}
                       >
@@ -1362,7 +1464,7 @@ function App() {
                         duration: 0.3,
                         delay: 17,
                       }}
-                      className="absolute top-0 right-0  mt-72 z-100 text-white m-12 text-8xl w-min hover:text-gray-200 font-display"
+                      className="select-none absolute top-0 right-0  mt-72 z-100 text-white m-12 text-8xl w-min hover:text-gray-200 font-display"
                       onClick={advanceState}
                     >
                       ☞
@@ -1518,7 +1620,7 @@ function App() {
                         duration: 0.3,
                         delay: 3,
                       }}
-                      className="absolute bottom-0 right-1/3  mb-72 z-100 text-white m-12 text-8xl w-min hover:text-gray-400 font-display"
+                      className="select-none absolute bottom-0 right-1/3  mb-72 z-100 text-white m-12 text-8xl w-min hover:text-gray-400 font-display"
                       onClick={advanceState}
                     >
                       ✺
