@@ -76,7 +76,10 @@ function App() {
 
   return (
     <div>
-      <div className="flex w-screen min-h-screen items-center">
+      <div
+        className="flex w-screen min-h-screen items-center"
+        style={{ fontVariantLigatures: "none" }}
+      >
         <div className="w-full place-items-stretch">
           <AnimatePresence>
             {
@@ -482,7 +485,7 @@ function App() {
                 ),
                 10: (
                   <div className="flex h-screen">
-                    <div className="text-4xl w-1/2 p-12 leading-none">
+                    <div className="text-5xl w-1/2 p-12 leading-none">
                       <motion.div
                         initial={{ y: "-10%", opacity: 0 }}
                         animate={{ y: "0%", opacity: 1 }}
@@ -550,7 +553,7 @@ function App() {
                 ),
                 11: (
                   <div className="flex h-screen">
-                    <div className="text-4xl w-1/2 p-12 leading-none">
+                    <div className="text-5xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span className="font-serif">Genre</span> is a category
@@ -600,7 +603,7 @@ function App() {
                 ),
                 12: (
                   <div className="flex h-screen">
-                    <div className="text-4xl w-1/2 p-12 leading-none">
+                    <div className="text-5xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -736,7 +739,7 @@ function App() {
                 ),
                 13: (
                   <div className="flex h-screen">
-                    <div className="text-4xl w-1/2 p-12 leading-none">
+                    <div className="text-5xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -766,7 +769,7 @@ function App() {
                             duration: 0.8,
                             delay: 1,
                           }}
-                          className="pt-4"
+                          className=""
                           style={{ color: `${currentHoverColor}` }}
                         >
                           {" "}
@@ -855,7 +858,7 @@ function App() {
                 ),
                 14: (
                   <div className="flex h-screen">
-                    <div className="text-4xl w-1/2 p-12 leading-none">
+                    <div className="text-5xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -877,7 +880,7 @@ function App() {
                       <div className="flex flex-wrap w-auto">
                         <div className="pt-4"> They can be </div>
                         <div className="pt-4 pl-4"> aesthetic,</div>
-                        <div className="pt-4"> communicative, </div>
+                        <div className=""> communicative, </div>
                         <motion.div
                           initial={{ y: "-10%", opacity: 0 }}
                           animate={{ y: "0%", opacity: 1 }}
@@ -981,7 +984,7 @@ function App() {
                 ),
                 15: (
                   <div className="flex h-screen">
-                    <div className="text-4xl w-1/2 p-12 leading-none">
+                    <div className="text-5xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -1003,7 +1006,7 @@ function App() {
                       <div className="flex flex-wrap w-auto">
                         <div className="pt-4"> They can be </div>
                         <div className="pt-4 pl-4"> aesthetic,</div>
-                        <div className="pt-4"> communicative, </div>
+                        <div className=""> communicative, </div>
                         <div className="pl-2"> or functional.</div>
                       </div>
                       <motion.div
@@ -1116,8 +1119,8 @@ function App() {
                   </div>
                 ),
                 16: (
-                  <div className="flex h-screen">
-                    <div className="text-4xl w-1/2 p-12 leading-none">
+                  <div className="relative flex h-screen">
+                    <div className="text-5xl w-1/2 p-12 leading-none">
                       <p>
                         {" "}
                         <span
@@ -1139,7 +1142,7 @@ function App() {
                       <div className="flex flex-wrap w-auto">
                         <div className="pt-4"> They can be </div>
                         <div className="pt-4 pl-4"> aesthetic,</div>
-                        <div className="pt-4"> communicative, </div>
+                        <div className=""> communicative, </div>
                         <div className="pl-2"> or functional.</div>
                       </div>
                       <div className="pt-4">
@@ -1164,7 +1167,7 @@ function App() {
                           delay: 2,
                         }}
                       >
-                        Often, identities merge into multiple genres by way of
+                        Often, identities fit into multiple genres by way of
                         borrowing and recombining these conventions.
                       </motion.div>
 
@@ -1229,21 +1232,22 @@ function App() {
                   </div>
                 ),
                 17: (
-                  <div className="flex h-screen">
-                    <div className="absolute w-full h-screen bg-gray-900 p-12 overflow-scroll">
-                      <div className="w-full flex flex-row flex-wrap justify-evenly m-auto gap-2 opacity-80">
+                  <div className="flex bg-gray-900 h-screen">
+                    <div className="absolute w-full h-screen z-10  overflow-scroll">
+                      <div className="w-full flex flex-row justify-around m-auto z-10 opacity-90">
                         {data.map((song, index) => {
+                          const del = index * 0.25;
                           return (
                             <>
                               <motion.div
-                                initial={{ y: "0%", opacity: 0 }}
+                                initial={{ y: "-30%", opacity: 0 }}
                                 animate={{ y: "0%", opacity: 1 }}
                                 transition={{
                                   ease: "easeOut",
-                                  duration: 0.3,
-                                  delay: 0,
+                                  duration: 1,
+                                  delay: del,
                                 }}
-                                className="w-48 h-48 -ml-20 z-10 filter blur-3xl saturate-100"
+                                className="w-8 -ml-2 h-screen z-10 filter blur-2xl saturate-150"
                                 style={{
                                   backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
                                 }}
@@ -1263,7 +1267,41 @@ function App() {
                         })}
                       </div>
                     </div>
-                    <div className="z-50 text-4xl w-1/2 p-12 leading-none text-gray-50">
+                    <div className="absolute w-full h-screen z-50  overflow-scroll">
+                      <div className="w-full flex flex-row justify-around m-auto z-50 opacity-90">
+                        {data.map((song, index) => {
+                          const del = index * 0.25;
+                          return (
+                            <>
+                              <motion.div
+                                initial={{ y: "-30%", opacity: 0 }}
+                                animate={{ y: "0%", opacity: 0 }}
+                                transition={{
+                                  ease: "easeOut",
+                                  duration: 1,
+                                  delay: del,
+                                }}
+                                className="w-8 -ml-2 h-screen z-50 filter blur-2xl saturate-150"
+                                style={{
+                                  backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
+                                }}
+                                onMouseEnter={() => {
+                                  setCurrentHoverColor(
+                                    sortedHexArray[index].ProminentColor1
+                                  );
+                                  setCurrentSongObject(sortedHexArray[index]);
+                                }}
+                                onMouseLeave={() => {
+                                  setCurrentHoverColor("#000");
+                                  setCurrentSongObject(null);
+                                }}
+                              ></motion.div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="z-40 select-none h-max text-5xl w-1/2 p-12 leading-none text-gray-50">
                       <p>
                         {" "}
                         <span className="font-serif">Genre</span> is a category
@@ -1278,7 +1316,7 @@ function App() {
                       <div className="flex flex-wrap w-auto">
                         <div className="pt-4"> They can be </div>
                         <div className="pt-4 pl-4"> aesthetic,</div>
-                        <div className="pt-4"> communicative, </div>
+                        <div className=""> communicative, </div>
                         <div className="pl-2"> or functional.</div>
                       </div>
                       <div className="pt-4">
@@ -1287,7 +1325,7 @@ function App() {
                         use of old ones.
                       </div>
                       <div className="pt-4">
-                        Often, identities merge into multiple genres by way of
+                        Often, identities fit into multiple genres by way of
                         borrowing and recombining these conventions.
                       </div>
 
@@ -1298,6 +1336,398 @@ function App() {
                         ☞
                       </div> */}
                     </div>
+                    <div className="z-40 select-none text-5xl w-1/2 p-12 leading-none text-gray-50">
+                      <motion.div
+                        initial={{ y: "-10%", opacity: 0 }}
+                        animate={{ y: "0%", opacity: 1 }}
+                        transition={{
+                          ease: "easeIn",
+                          duration: 0.3,
+                          delay: 15,
+                        }}
+                      >
+                        ...the subjective nature of these identities means that
+                        that these classifications are often arbitrary and
+                        controversial,
+                        <br></br>
+                        and they may overlap.
+                      </motion.div>
+                    </div>
+                    <motion.div
+                      style={{ zIndex: "100" }}
+                      initial={{ y: "-10%", opacity: 0 }}
+                      animate={{ y: "0%", opacity: 1 }}
+                      transition={{
+                        ease: "easeIn",
+                        duration: 0.3,
+                        delay: 17,
+                      }}
+                      className="absolute top-0 right-0  mt-72 z-100 text-white m-12 text-8xl w-min hover:text-gray-200 font-display"
+                      onClick={advanceState}
+                    >
+                      ☞
+                    </motion.div>
+                    <AnimatePresence>
+                      {currentSongObject && (
+                        <>
+                          <motion.div
+                            initial={{ y: "-10%", opacity: 0 }}
+                            animate={{ y: "0%", opacity: 1 }}
+                            exit={{ y: "-10%", opacity: 0 }}
+                            transition={{
+                              ease: "easeIn",
+                              duration: 0.3,
+                              delay: 0,
+                            }}
+                            className="absolute bottom-0 bg-gray-900 text-center pb-8 right-0 h-16 w-screen text-sm  z-30 pt-12 filter blur-3xl saturate-150 bg-opacity-70"
+                          ></motion.div>
+                          <motion.div
+                            className="z-40 text-center absolute bottom-0 flex w-screen h-16 mb-8 text-white flex-col justify-around filter saturate-150"
+                            initial={{ y: "-10%", opacity: 0 }}
+                            animate={{ y: "0%", opacity: 1 }}
+                            exit={{ y: "-10%", opacity: 0 }}
+                            transition={{
+                              ease: "easeIn",
+                              duration: 0.3,
+                              delay: 0,
+                            }}
+                          >
+                            <div className="truncate text-3xl capitalize font-serif">
+                              {currentSongObject.Genre}
+                            </div>
+                            <div className="text-sm capitalize font-serif">
+                              {currentSongObject.SongName}
+                            </div>
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ),
+                18: (
+                  <div className="flex bg-gray-900 h-screen">
+                    <div className="absolute w-full h-screen z-10  overflow-scroll">
+                      <div className="w-full flex flex-row justify-around m-auto z-10 opacity-90">
+                        {data.map((song, index) => {
+                          return (
+                            <>
+                              <div
+                                className="w-8 -ml-2 h-screen z-10 filter blur-2xl saturate-150"
+                                style={{
+                                  backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
+                                }}
+                                onMouseEnter={() => {
+                                  setCurrentHoverColor(
+                                    sortedHexArray[index].ProminentColor1
+                                  );
+                                  setCurrentSongObject(sortedHexArray[index]);
+                                }}
+                                onMouseLeave={() => {
+                                  setCurrentHoverColor("#000");
+                                  setCurrentSongObject(null);
+                                }}
+                              ></div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="absolute w-full h-screen z-50  overflow-scroll">
+                      <div className="w-full flex flex-row justify-around m-auto z-50 opacity-90">
+                        {data.map((song, index) => {
+                          return (
+                            <>
+                              <div
+                                className="w-8 -ml-2 h-screen z-50 filter blur-2xl saturate-150"
+                                style={{
+                                  opacity: 0,
+                                }}
+                                onMouseEnter={() => {
+                                  setCurrentHoverColor(
+                                    sortedHexArray[index].ProminentColor1
+                                  );
+                                  setCurrentSongObject(sortedHexArray[index]);
+                                }}
+                                onMouseLeave={() => {
+                                  setCurrentHoverColor("#000");
+                                  setCurrentSongObject(null);
+                                }}
+                              ></div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="z-40 select-none h-max text-5xl w-1/2 p-12 leading-none text-gray-50">
+                      <p>
+                        {" "}
+                        <span className="font-serif">Genre</span> is a category
+                        of music, literature or other forms of art <br></br>{" "}
+                        based on some set of criteria.
+                      </p>
+                      <p className="pt-4">
+                        {" "}
+                        It is a type of communication with socially-agreed-upon
+                        conventions developed over time.
+                      </p>
+                      <div className="flex flex-wrap w-auto">
+                        <div className="pt-4"> They can be </div>
+                        <div className="pt-4 pl-4"> aesthetic,</div>
+                        <div className=""> communicative, </div>
+                        <div className="pl-2"> or functional.</div>
+                      </div>
+                      <div className="pt-4">
+                        <span className="font-serif">Genres</span> change over
+                        time as cultures invent new genres and discontinue the
+                        use of old ones.
+                      </div>
+                      <div className="pt-4">
+                        Often, identities fit into multiple genres by way of
+                        borrowing and recombining these conventions.
+                      </div>
+                    </div>
+                    <div className="z-40 select-none text-5xl w-1/2 p-12 leading-none text-gray-50">
+                      <div>
+                        ...the subjective nature of these identities means that
+                        that these classifications are often arbitrary and
+                        controversial,
+                        <br></br>
+                        and they may overlap.
+                      </div>
+                      <motion.div
+                        className="pt-12"
+                        initial={{ y: "-10%", opacity: 0 }}
+                        animate={{ y: "0%", opacity: 1 }}
+                        transition={{
+                          ease: "easeIn",
+                          duration: 0.3,
+                          delay: 2,
+                        }}
+                      >
+                        <span className="font-serif">Genre</span> is in fact
+                        fluid, like the English translation of the french word
+                        <span className="font-serif"> Genre.</span>
+                      </motion.div>
+                    </div>
+                    <motion.div
+                      style={{ zIndex: "100" }}
+                      initial={{ y: "-10%", opacity: 0 }}
+                      animate={{ y: "0%", opacity: 1 }}
+                      transition={{
+                        ease: "easeIn",
+                        duration: 0.3,
+                        delay: 3,
+                      }}
+                      className="absolute bottom-0 right-1/3  mb-72 z-100 text-white m-12 text-8xl w-min hover:text-gray-400 font-display"
+                      onClick={advanceState}
+                    >
+                      ✺
+                    </motion.div>
+                    <AnimatePresence>
+                      {currentSongObject && (
+                        <>
+                          <motion.div
+                            initial={{ y: "-10%", opacity: 0 }}
+                            animate={{ y: "0%", opacity: 1 }}
+                            exit={{ y: "-10%", opacity: 0 }}
+                            transition={{
+                              ease: "easeIn",
+                              duration: 0.3,
+                              delay: 0,
+                            }}
+                            className="absolute bottom-0 bg-gray-900 text-center pb-8 right-0 h-16 w-screen text-sm  z-30 pt-12 filter blur-3xl saturate-150 bg-opacity-70"
+                          ></motion.div>
+                          <motion.div
+                            className="z-40 text-center absolute bottom-0 flex w-screen h-16 mb-8 text-white flex-col justify-around filter saturate-150"
+                            initial={{ y: "-10%", opacity: 0 }}
+                            animate={{ y: "0%", opacity: 1 }}
+                            exit={{ y: "-10%", opacity: 0 }}
+                            transition={{
+                              ease: "easeIn",
+                              duration: 0.3,
+                              delay: 0,
+                            }}
+                          >
+                            <div className="truncate text-3xl capitalize font-serif">
+                              {currentSongObject.Genre}
+                            </div>
+                            <div className="text-sm capitalize font-serif">
+                              {currentSongObject.SongName}
+                            </div>
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ),
+                19: (
+                  <div className="flex bg-gray-900 h-screen">
+                    <div className="absolute w-full h-screen z-10  overflow-scroll">
+                      <div className="w-full flex flex-row justify-around m-auto z-10 opacity-90">
+                        {data.map((song, index) => {
+                          return (
+                            <>
+                              <div
+                                className="w-8 -ml-2 h-screen z-10 filter blur-2xl saturate-150"
+                                style={{
+                                  backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
+                                }}
+                                onMouseEnter={() => {
+                                  setCurrentHoverColor(
+                                    sortedHexArray[index].ProminentColor1
+                                  );
+                                  setCurrentSongObject(sortedHexArray[index]);
+                                }}
+                                onMouseLeave={() => {
+                                  setCurrentHoverColor("#000");
+                                  setCurrentSongObject(null);
+                                }}
+                              ></div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="absolute w-full h-screen z-50  overflow-scroll">
+                      <div className="w-full flex flex-row justify-around m-auto z-50 opacity-90">
+                        {data.map((song, index) => {
+                          return (
+                            <>
+                              <div
+                                className="w-8 -ml-2 h-screen z-50 filter blur-2xl saturate-150"
+                                style={{
+                                  opacity: 0,
+                                }}
+                                onMouseEnter={() => {
+                                  setCurrentHoverColor(
+                                    sortedHexArray[index].ProminentColor1
+                                  );
+                                  setCurrentSongObject(sortedHexArray[index]);
+                                }}
+                                onMouseLeave={() => {
+                                  setCurrentHoverColor("#000");
+                                  setCurrentSongObject(null);
+                                }}
+                              ></div>
+                            </>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div className="z-40 select-none h-max text-5xl w-1/2 p-12 leading-none text-gray-50">
+                      <p>
+                        {" "}
+                        <motion.span
+                          initial={{ y: "-10%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          transition={{
+                            ease: "easeIn",
+                            duration: 0.8,
+                            delay: 1,
+                          }}
+                          className="w-28 text-center text-5xl italic font-serif"
+                        >
+                          Gender
+                        </motion.span>{" "}
+                        is<br></br>{" "}
+                        <span className="pt-12">
+                          based on some set of criteria.
+                        </span>
+                      </p>
+                      <p className="pt-4">
+                        {" "}
+                        It is a type of communication with socially-agreed-upon
+                        conventions developed over time.
+                      </p>
+                      <div className="flex flex-wrap w-auto">
+                        <div className="pt-4"> They can be </div>
+                        <div className="pt-4 pl-4"> aesthetic,</div>
+                        <div className=""> communicative, </div>
+                        <div className="pl-2"> or functional.</div>
+                      </div>
+                      <div className="pt-4">
+                        <motion.span
+                          initial={{ y: "-10%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          transition={{
+                            ease: "easeIn",
+                            duration: 0.8,
+                            delay: 2,
+                          }}
+                          className="w-28 mr-2 text-center text-5xl italic font-serif"
+                        >
+                          Genders
+                        </motion.span>
+                        change over time as cultures invent new genders and
+                        discontinue the use of old ones.
+                      </div>
+                      <div className="pt-4">
+                        Often, identities fit into multiple genres by way of
+                        borrowing and recombining these conventions.
+                      </div>
+                    </div>
+                    <div className="z-40 select-none text-5xl w-1/2 p-12 leading-none text-gray-50">
+                      <div>
+                        ...the subjective nature of these identities means that
+                        that these classifications are often arbitrary and
+                        controversial,
+                        <br></br>
+                        and they may overlap.
+                      </div>
+                      <div className="pt-12">
+                        <motion.span
+                          initial={{ y: "-10%", opacity: 0 }}
+                          animate={{ y: "0%", opacity: 1 }}
+                          transition={{
+                            ease: "easeIn",
+                            duration: 0.8,
+                            delay: 3,
+                          }}
+                          className="w-28 text-center text-5xl italic font-serif"
+                        >
+                          Gender
+                        </motion.span>{" "}
+                        is in fact fluid, like the English translation of the
+                        french word
+                        <span className="font-serif"> Genre.</span>
+                      </div>
+                    </div>
+
+                    <AnimatePresence>
+                      {currentSongObject && (
+                        <>
+                          <motion.div
+                            initial={{ y: "-10%", opacity: 0 }}
+                            animate={{ y: "0%", opacity: 1 }}
+                            exit={{ y: "-10%", opacity: 0 }}
+                            transition={{
+                              ease: "easeIn",
+                              duration: 0.3,
+                              delay: 0,
+                            }}
+                            className="absolute bottom-0 bg-gray-900 text-center pb-8 right-0 h-16 w-screen text-sm  z-30 pt-12 filter blur-3xl saturate-150 bg-opacity-70"
+                          ></motion.div>
+                          <motion.div
+                            className="z-40 text-center absolute bottom-0 flex w-screen h-16 mb-8 text-white flex-col justify-around filter saturate-150"
+                            initial={{ y: "-10%", opacity: 0 }}
+                            animate={{ y: "0%", opacity: 1 }}
+                            exit={{ y: "-10%", opacity: 0 }}
+                            transition={{
+                              ease: "easeIn",
+                              duration: 0.3,
+                              delay: 0,
+                            }}
+                          >
+                            <div className="truncate text-3xl capitalize font-serif">
+                              {currentSongObject.Genre}
+                            </div>
+                            <div className="text-sm capitalize font-serif">
+                              {currentSongObject.SongName}
+                            </div>
+                          </motion.div>
+                        </>
+                      )}
+                    </AnimatePresence>
                   </div>
                 ),
               }[animState]
