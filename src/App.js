@@ -28,7 +28,7 @@ import SectionNineteen from "./sections/SectionNineteen";
 let sixAlbums = require.context("../src/assets/sixAlbums", true);
 
 function App() {
-  const [animState, setAnimState] = useState(18);
+  const [animState, setAnimState] = useState(0);
   const [firstSelectedSong, setFirstSelectedSong] = useState(firstSongList[0]);
   const [secondSelectedSong, setSecondSelectedSong] = useState(
     secondSongList[0]
