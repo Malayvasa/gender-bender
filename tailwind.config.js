@@ -23,6 +23,9 @@ module.exports = {
         serif: ["Alegreya", "serif"],
         sans: ["Akzidenz", "sans-serif"],
       },
+      spacing: {
+        22: "5.5rem",
+      },
     },
   },
   variants: {
