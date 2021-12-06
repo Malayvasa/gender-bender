@@ -35,7 +35,7 @@ function SectionSix({ advanceState }) {
                   delay: 1,
                 }}
               >
-                Sound On,
+                SOUND ON
               </motion.div>
 
               <div className="mx-auto mt-12 w-full">

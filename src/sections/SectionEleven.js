@@ -110,7 +110,7 @@ function SectionEleven({ advanceState }) {
                     transition={{
                       ease: "easeOut",
                       duration: 0.8,
-                      delay: 2,
+                      delay: 4,
                     }}
                     style={{
                       backgroundColor: `${song.ProminentColor1}`,
