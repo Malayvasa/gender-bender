@@ -6,7 +6,7 @@ function NextButton({ delay, advanceState }) {
       initial={{ x: "0%", y: "-20%", opacity: 0 }}
       animate={{ y: "0%", opacity: 1 }}
       transition={{ ease: "easeOut", duration: 1, delay: delay }}
-      className="select-none  w-min text-8xl md:text-7xl hover:text-blue-600 my-auto"
+      className="select-none  w-min text-7xl hover:text-blue-600 my-auto"
       onClick={advanceState}
     >
       <motion.div

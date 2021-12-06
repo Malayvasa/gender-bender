@@ -6,6 +6,7 @@ import useKeypress from "react-use-keypress";
 import firstSongList from "./data/firstSongList";
 import secondSongList from "./data/secondSongList";
 
+import SectionZero from "./sections/SectionZero";
 import SectionOne from "./sections/SectionOne";
 import SectionTwo from "./sections/SectionTwo";
 import SectionThree from "./sections/SectionThree";
@@ -26,22 +27,23 @@ import SectionEighteen from "./sections/SectionEighteen";
 import SectionNineteen from "./sections/SectionNineteen";
 
 let sixAlbums = require.context("../src/assets/sixAlbums", true);
+let Tracks = require.context("../src/assets/tracks", true);
 
 function App() {
-  const [animState, setAnimState] = useState(1);
+  const [animState, setAnimState] = useState(0);
   const [firstSelectedSong, setFirstSelectedSong] = useState(firstSongList[0]);
   const [secondSelectedSong, setSecondSelectedSong] = useState(
     secondSongList[0]
   );
   const advanceState = () => {
     if (animState >= 19) {
-      setAnimState(1);
+      setAnimState(0);
     } else {
       setAnimState(animState + 1);
     }
   };
   const previousState = () => {
-    if (animState <= 1) {
+    if (animState <= 0) {
       setAnimState(19);
     } else {
       setAnimState(animState - 1);
@@ -66,7 +68,8 @@ function App() {
           <AnimatePresence>
             {
               {
-                1: <SectionOne advanceState={advanceState} />,
+                0: <SectionZero advanceState={advanceState} />,
+                1: <SectionOne advanceState={advanceState} Tracks={Tracks} />,
                 2: (
                   <SectionTwo
                     advanceState={advanceState}
@@ -80,6 +83,8 @@ function App() {
                     advanceState={advanceState}
                     sixAlbums={sixAlbums}
                     selectedSong={firstSelectedSong}
+                    Tracks={Tracks}
+                    TrackNum={4}
                   ></SectionThree>
                 ),
                 4: (
@@ -95,11 +100,28 @@ function App() {
                     advanceState={advanceState}
                     sixAlbums={sixAlbums}
                     selectedSong={secondSelectedSong}
+                    Tracks={Tracks}
+                    TrackNum={8}
                   ></SectionThree>
                 ),
-                6: <SectionSix advanceState={advanceState}></SectionSix>,
-                7: <SectionSeven advanceState={advanceState}></SectionSeven>,
-                8: <SectionEight advanceState={advanceState}></SectionEight>,
+                6: (
+                  <SectionSix
+                    advanceState={advanceState}
+                    Tracks={Tracks}
+                  ></SectionSix>
+                ),
+                7: (
+                  <SectionSeven
+                    advanceState={advanceState}
+                    Tracks={Tracks}
+                  ></SectionSeven>
+                ),
+                8: (
+                  <SectionEight
+                    advanceState={advanceState}
+                    Tracks={Tracks}
+                  ></SectionEight>
+                ),
                 9: <SectionNine advanceState={advanceState}></SectionNine>,
                 10: <SectionTen advanceState={advanceState}></SectionTen>,
                 11: <SectionEleven advanceState={advanceState}></SectionEleven>,
