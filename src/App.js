@@ -25,6 +25,7 @@ import SectionSixteen from "./sections/SectionSixteen";
 import SectionSeventeen from "./sections/SectionSeventeen";
 import SectionEighteen from "./sections/SectionEighteen";
 import SectionNineteen from "./sections/SectionNineteen";
+import SectionTwenty from "./sections/SectionTwenty";
 
 let sixAlbums = require.context("../src/assets/sixAlbums", true);
 let Tracks = require.context("../src/assets/tracks", true);
@@ -36,7 +37,7 @@ function App() {
     secondSongList[0]
   );
   const advanceState = () => {
-    if (animState >= 19) {
+    if (animState >= 20) {
       setAnimState(0);
     } else {
       setAnimState(animState + 1);
@@ -44,7 +45,7 @@ function App() {
   };
   const previousState = () => {
     if (animState <= 0) {
-      setAnimState(19);
+      setAnimState(20);
     } else {
       setAnimState(animState - 1);
     }
@@ -128,11 +129,23 @@ function App() {
                 12: <SectionTwelve advanceState={advanceState}></SectionTwelve>,
                 13: <SectionThirteen advanceState={advanceState} />,
                 14: <SectionFourteen advanceState={advanceState} />,
-                15: <SectionFifteen advanceState={advanceState} />,
-                16: <SectionSixteen advanceState={advanceState} />,
-                17: <SectionSeventeen advanceState={advanceState} />,
+                15: (
+                  <SectionFifteen advanceState={advanceState} Tracks={Tracks} />
+                ),
+                16: (
+                  <SectionSixteen advanceState={advanceState} Tracks={Tracks} />
+                ),
+                17: (
+                  <SectionSeventeen
+                    advanceState={advanceState}
+                    Tracks={Tracks}
+                  />
+                ),
                 18: <SectionEighteen advanceState={advanceState} />,
                 19: <SectionNineteen advanceState={advanceState} />,
+                20: (
+                  <SectionTwenty advanceState={advanceState} Tracks={Tracks} />
+                ),
               }[animState]
             }
           </AnimatePresence>

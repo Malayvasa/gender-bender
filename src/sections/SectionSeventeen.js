@@ -4,8 +4,21 @@ import convert from "color-convert";
 import NextButton from "../components/NextButton";
 import data from "../data/data";
 
-function SectionSeventeen({ advanceState }) {
+function SectionSeventeen({ advanceState, Tracks }) {
   const [currentSongObject, setCurrentSongObject] = useState(null);
+  const T10 = new Audio(Tracks(`./T10.mp3`).default);
+  const [isPlayedOnce, setIsPlayedOnce] = useState(false);
+
+  const playTrack = (TrackNum) => {
+    if (TrackNum === 10 && !isPlayedOnce) {
+      T10.load();
+      setTimeout(() => {
+        T10.play();
+        setIsPlayedOnce(true);
+      }, 0);
+      T10.pause();
+    }
+  };
 
   const sortHue = () => {
     let array = data.map((item) => item);
@@ -41,6 +54,7 @@ function SectionSeventeen({ advanceState }) {
                 <motion.div
                   initial={{ y: "0%", opacity: 1 }}
                   animate={{ y: "0%", opacity: 0 }}
+                  onAnimationStart={() => playTrack(10)}
                   transition={{
                     ease: "easeOut",
                     duration: 1,
