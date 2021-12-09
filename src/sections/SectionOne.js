@@ -203,7 +203,7 @@ function SectionOne({ advanceState, Tracks }) {
                   )}
                 </AnimatePresence>
               </div>{" "}
-              CATEGORIES
+              CATEGORIES?
             </motion.div>
             <div className="pt-8">
               <NextButton advanceState={interimAdvanceState} delay={9.5} />

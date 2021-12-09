@@ -66,7 +66,7 @@ function SectionNine({ advanceState }) {
               transition={{
                 ease: "easeOut",
                 duration: 1,
-                delay: 6,
+                delay: 8,
               }}
             >
               YOU CAN BREAK <span className="font-serif">genre</span>
@@ -77,7 +77,7 @@ function SectionNine({ advanceState }) {
                 transition={{
                   ease: "easeOut",
                   duration: 1,
-                  delay: 7.5,
+                  delay: 9.5,
                 }}
               >
                 .

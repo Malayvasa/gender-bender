@@ -77,7 +77,7 @@ function SectionSixteen({ advanceState }) {
                     duration: 1,
                     delay: del,
                   }}
-                  className="w-8 -ml-2 h-screen z-50 filter blur-2xl saturate-150"
+                  className="w-8 -ml-2 h-screen z-50 filter blur-3xl saturate-150"
                   style={{
                     backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
                   }}

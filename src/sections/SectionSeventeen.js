@@ -75,7 +75,7 @@ function SectionSeventeen({ advanceState }) {
                     duration: 1,
                     delay: 1,
                   }}
-                  className="w-8 -ml-2 h-screen z-10 filter blur-2xl saturate-150"
+                  className="w-8 -ml-2 h-screen z-10 filter blur-3xl saturate-150"
                   style={{
                     backgroundColor: `${sortedHexArray[index].ProminentColor1}`,
                   }}
@@ -129,7 +129,7 @@ function SectionSeventeen({ advanceState }) {
           <span className="font-serif">Genre.</span>
         </motion.div>
         <div className="m-auto pt-12 z-50">
-          <NextButton advanceState={advanceState} delay={2} />
+          <NextButton advanceState={advanceState} delay={8} />
         </div>
       </div>
       <AnimatePresence>

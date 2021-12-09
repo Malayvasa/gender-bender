@@ -1,23 +1,23 @@
 const secondSongList = [
   {
-    SongName: "Selfish",
+    SongName: "Women",
     Artist: "Little Simz",
-    Genre: "Hip-Hop, Rap, Jazz Rap, UK Rap",
-    ReleaseYear: 2019,
+    Genre: "Hip-Hop, Rap, UK Rap",
+    ReleaseYear: 2021,
     Cover: 4,
   },
   {
     SongName: "Cumbai Espacial",
-    Artist: "Ondaropica",
+    Artist: "Ondatropica",
     Genre: "Afro-Caribbean Ska, Funk, Jazz",
     ReleaseYear: 2012,
     Cover: 5,
   },
   {
-    SongName: "Little Dear",
-    Artist: "Spellling",
-    Genre: "Progressive Pop, Experimental Pop",
-    ReleaseYear: 2021,
+    SongName: "Forest Nativity",
+    Artist: "Francis Bebey",
+    Genre: "Makossa, Classical guitar, Jazz",
+    ReleaseYear: 1982,
     Cover: 6,
   },
 ];

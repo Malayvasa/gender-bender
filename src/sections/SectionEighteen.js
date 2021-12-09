@@ -84,7 +84,7 @@ function SectionEighteen({ advanceState }) {
           transition={{
             ease: "easeOut",
             duration: 1,
-            delay: 0,
+            delay: 4,
           }}
           className="z-10"
         >
@@ -93,7 +93,7 @@ function SectionEighteen({ advanceState }) {
           <span className="font-serif">Genre.</span>
         </motion.div>
         <div className="m-auto pt-12 z-50">
-          <NextButton advanceState={advanceState} delay={2} />
+          <NextButton advanceState={advanceState} delay={8} />
         </div>
       </div>
       <AnimatePresence>

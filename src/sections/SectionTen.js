@@ -60,7 +60,7 @@ function SectionTen({ advanceState }) {
           transition={{
             ease: "easeIn",
             duration: 0.8,
-            delay: 11.5,
+            delay: 13.5,
           }}
           className="font-serif pt-24"
         >
@@ -116,7 +116,7 @@ function SectionTen({ advanceState }) {
                   transition={{
                     ease: "easeIn",
                     duration: 0.8,
-                    delay: 13.5,
+                    delay: 15.5,
                   }}
                   className="w-24 h-24 hover hover:text-blue-600"
                   onClick={advanceState}
