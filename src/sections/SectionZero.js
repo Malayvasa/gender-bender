@@ -28,11 +28,23 @@ function SectionSix({ advanceState }) {
               <motion.div
                 initial={{ y: "-20%", opacity: 0 }}
                 animate={{ y: "0%", opacity: 1 }}
-                className="w-max"
+                className="w-max italic mx-auto text-8xl font-serif"
                 transition={{
                   ease: "easeOut",
                   duration: 1,
                   delay: 1,
+                }}
+              >
+                Genre
+              </motion.div>
+              <motion.div
+                initial={{ y: "-20%", opacity: 0 }}
+                animate={{ y: "0%", opacity: 1 }}
+                className="w-max mx-auto text-lg"
+                transition={{
+                  ease: "easeOut",
+                  duration: 1,
+                  delay: 2,
                 }}
               >
                 SOUND ON
@@ -45,7 +57,7 @@ function SectionSix({ advanceState }) {
                     animate={{ y: "0%", opacity: 1 }}
                     exit={{ y: "-20%", opacity: 0 }}
                     transition={{ ease: "easeOut", duration: 1, delay: 2 }}
-                    className="w-24 -ml-8 pb-8 text-black hover:text-blue-600"
+                    className="w-24 -ml-4 pb-8 text-black hover:text-blue-600"
                     onClick={interimAdvanceState}
                   >
                     <svg

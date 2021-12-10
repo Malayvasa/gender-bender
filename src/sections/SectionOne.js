@@ -140,7 +140,7 @@ function SectionOne({ advanceState, Tracks }) {
                           duration: 0.3,
                           delay: 0.4,
                         }}
-                        className="text-center font-serif w-full"
+                        className="text-center italic font-serif w-full"
                       >
                         {" "}
                         classified{" "}
@@ -194,7 +194,7 @@ function SectionOne({ advanceState, Tracks }) {
                           duration: 0.5,
                           delay: 1,
                         }}
-                        className="text-center font-serif w-full"
+                        className="text-center italic font-serif w-full"
                       >
                         {" "}
                         solid{" "}

@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import { AnimatePresence } from "framer-motion";
-import useKeypress from "react-use-keypress";
 
 import firstSongList from "./data/firstSongList";
 import secondSongList from "./data/secondSongList";
@@ -26,38 +25,27 @@ import SectionSeventeen from "./sections/SectionSeventeen";
 import SectionEighteen from "./sections/SectionEighteen";
 import SectionNineteen from "./sections/SectionNineteen";
 import SectionTwenty from "./sections/SectionTwenty";
+import BackButton from "./components/BackButton";
 
 let sixAlbums = require.context("../src/assets/sixAlbums", true);
 let Tracks = require.context("../src/assets/tracks", true);
 
 function App() {
+  console.log("ReRender");
   const [animState, setAnimState] = useState(0);
   const [firstSelectedSong, setFirstSelectedSong] = useState(firstSongList[0]);
   const [secondSelectedSong, setSecondSelectedSong] = useState(
     secondSongList[0]
   );
   const advanceState = () => {
-    if (animState >= 20) {
+    if (animState === 20) {
       setAnimState(0);
-    } else {
-      setAnimState(animState + 1);
-    }
-  };
-  const previousState = () => {
-    if (animState <= 0) {
-      setAnimState(20);
-    } else {
-      setAnimState(animState - 1);
-    }
+    } else setAnimState(animState + 1);
   };
 
-  useKeypress(["ArrowLeft", "ArrowRight"], (event) => {
-    if (event.key === "ArrowLeft") {
-      previousState();
-    } else {
-      advanceState();
-    }
-  });
+  const prevState = () => {
+    setAnimState(animState - 1);
+  };
 
   return (
     <div>
@@ -65,6 +53,11 @@ function App() {
         className="flex w-screen min-h-screen items-center"
         style={{ fontVariantLigatures: "none" }}
       >
+        {animState !== 0 && (
+          <div className="absolute top-0 left-0 text-3xl text-gray-400 ml-2 mt-2 z-200">
+            <BackButton advanceState={prevState} delay={0} />
+          </div>
+        )}
         <div className="w-full place-items-stretch">
           <AnimatePresence>
             {
@@ -85,7 +78,7 @@ function App() {
                     sixAlbums={sixAlbums}
                     selectedSong={firstSelectedSong}
                     Tracks={Tracks}
-                    TrackNum={4}
+                    TrackNum={firstSelectedSong.Cover}
                   ></SectionThree>
                 ),
                 4: (

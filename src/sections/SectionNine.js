@@ -57,7 +57,7 @@ function SectionNine({ advanceState }) {
                 delay: 4,
               }}
             >
-              CALLED <span className="font-serif">categories</span>
+              CALLED <span className="italic font-serif">categories</span>
             </motion.div>{" "}
             <motion.div
               className="pt-8"
@@ -69,7 +69,7 @@ function SectionNine({ advanceState }) {
                 delay: 8,
               }}
             >
-              YOU CAN BREAK <span className="font-serif">genre</span>
+              YOU CAN BREAK <span className="italic font-serif">genre</span>
               <motion.span
                 className="font-serif"
                 initial={{ y: "-20%", opacity: 0 }}
@@ -84,7 +84,7 @@ function SectionNine({ advanceState }) {
               </motion.span>
             </motion.div>{" "}
             <div className="mt-12 mx-auto">
-              <NextButton advanceState={interimAdvanceState} delay={9.5} />
+              <NextButton advanceState={interimAdvanceState} delay={11.5} />
             </div>
           </div>
         </motion.div>
